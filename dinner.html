@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinner Recipes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <a href="index.html" class="home-button">← Recipe Book</a>
+    <h1>Dinner</h1>
+</nav>
+
+<main class="recipe-container">
+
+    <button class="page-arrow left-arrow" onclick="previousRecipe()">‹</button>
+
+    <article class="recipe-page">
+
+        <div class="recipe-number" id="recipeNumber">
+            Recipe 1 of 3
+        </div>
+
+        <h2 id="recipeTitle">Flautas</h2>
+
+        <p class="description" id="recipeDescription">
+            Fried taquitos perfect for hosting a large gathering.
+        </p>
+
+        <div class="recipe-content">
+
+            <section>
+                <h3>Ingredients</h3>
+                <ul id="ingredients"></ul>
+            </section>
+
+            <section>
+                <h3>Instructions</h3>
+                <ol id="instructions"></ol>
+            </section>
+
+        </div>
+
+    </article>
+
+    <button class="page-arrow right-arrow" onclick="nextRecipe()">›</button>
+
+</main>
+
+
+<script>
+
+const recipes = [
+
+    {
+        title: "Flautas",
+
+        description:
+        "Fried taquitos perfect for hosting a large gathering.",
+
+        ingredients: [
+            "tortillas de maiz",
+            "Rotisserie chicken",
+            "Lettuce",
+            "Tomatoes",
+            "Oregano",
+            "Garlic",
+            "Sour cream",
+            "oil for frying"
+        ],
+
+        instructions: [
+            "Shred up chicken and heat up tortillas in the microwave. They need to be hot or else the tortilla will fall apart while being rolled.",
+            "Heat oil in a large pan and fry on each side for about 3 minutes.",
+            "When they are done frying take them out and place them on a paper towel",
+            "To make the sauce boil some tomatoes until soft",
+            "After they are soft, place them in a blender with garlic, oregano, salt, and some water that was used to boil the tomatoes.",
+            "Serve with lettuce and sour cream"
+        ]
+    },
+
+
+    {
+        title: "Roasted Chicken",
+
+        description:
+        "Juicy roasted chicken with crispy skin and flavorful herbs.",
+
+        ingredients: [
+            "2 chicken breasts",
+            "2 tablespoons olive oil",
+            "1 teaspoon garlic powder",
+            "1 teaspoon paprika",
+            "1 teaspoon Italian seasoning",
+            "Salt",
+            "Black pepper"
+        ],
+
+        instructions: [
+            "Preheat the oven to 400°F.",
+            "Place the chicken on a baking sheet.",
+            "Drizzle the chicken with olive oil.",
+            "Season with garlic powder and paprika.",
+            "Add Italian seasoning, salt, and pepper.",
+            "Roast for approximately 25–30 minutes.",
+            "Check that the chicken is fully cooked.",
+            "Let the chicken rest before serving."
+        ]
+    },
+
+
+    {
+        title: "Beef Tacos",
+
+        description:
+        "Seasoned beef tacos topped with fresh vegetables and cheese.",
+
+        ingredients: [
+            "1 lb ground beef",
+            "8 taco shells",
+            "1 packet taco seasoning",
+            "1 cup shredded lettuce",
+            "1 tomato, diced",
+            "1 cup shredded cheese",
+            "Sour cream",
+            "Salsa"
+        ],
+
+        instructions: [
+            "Brown the ground beef in a pan.",
+            "Drain any excess grease.",
+            "Add the taco seasoning.",
+            "Add water according to the seasoning instructions.",
+            "Simmer until the beef is fully seasoned.",
+            "Warm the taco shells.",
+            "Fill the shells with the beef.",
+            "Add lettuce, tomato, and cheese.",
+            "Top with sour cream and salsa."
+        ]
+    }
+
+];
+
+let currentRecipe = 0;
+
+
+function displayRecipe() {
+
+    const recipe = recipes[currentRecipe];
+
+    document.getElementById("recipeNumber").textContent =
+        `Recipe ${currentRecipe + 1} of ${recipes.length}`;
+
+    document.getElementById("recipeTitle").textContent =
+        recipe.title;
+
+    document.getElementById("recipeDescription").textContent =
+        recipe.description;
+
+
+    const ingredientsList =
+        document.getElementById("ingredients");
+
+    ingredientsList.innerHTML = "";
+
+    recipe.ingredients.forEach(function(ingredient) {
+
+        const li = document.createElement("li");
+
+        li.textContent = ingredient;
+
+        ingredientsList.appendChild(li);
+
+    });
+
+
+    const instructionsList =
+        document.getElementById("instructions");
+
+    instructionsList.innerHTML = "";
+
+    recipe.instructions.forEach(function(instruction) {
+
+        const li = document.createElement("li");
+
+        li.textContent = instruction;
+
+        instructionsList.appendChild(li);
+
+    });
+
+}
+
+
+function nextRecipe() {
+
+    currentRecipe++;
+
+    if (currentRecipe >= recipes.length) {
+        currentRecipe = 0;
+    }
+
+    displayRecipe();
+
+}
+
+
+function previousRecipe() {
+
+    currentRecipe--;
+
+    if (currentRecipe < 0) {
+        currentRecipe = recipes.length - 1;
+    }
+
+    displayRecipe();
+
+}
+
+
+displayRecipe();
+
+</script>
+
+</body>
+</html>

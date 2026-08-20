@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunch Recipes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <a href="index.html" class="home-button">← Recipe Book</a>
+    <h1>Lunch</h1>
+</nav>
+
+<main class="recipe-container">
+
+    <button class="page-arrow left-arrow" onclick="previousRecipe()">‹</button>
+
+    <article class="recipe-page">
+
+        <div class="recipe-number" id="recipeNumber">
+            Recipe 1 of 3
+        </div>
+
+        <h2 id="recipeTitle">Bolillo Sandwich</h2>
+
+        <p class="description" id="recipeDescription">
+            A decicious and filling sandwich
+        </p>
+
+        <div class="recipe-content">
+
+            <section>
+                <h3>Ingredients</h3>
+                <ul id="ingredients"></ul>
+            </section>
+
+            <section>
+                <h3>Instructions</h3>
+                <ol id="instructions"></ol>
+            </section>
+
+        </div>
+
+    </article>
+
+    <button class="page-arrow right-arrow" onclick="nextRecipe()">›</button>
+
+</main>
+
+
+<script>
+
+const recipes = [
+
+    {
+        title: "Bolillo Sandwich",
+
+        description:
+        "Crispy golden bread with warm, melted cheese inside.",
+
+        ingredients: [
+            "1 bolillo bread",
+            "1 slice of american cheese",
+            "Ham",
+            "Lettuce",
+            "Onion",
+            "Jalapeno",
+            "Mayo"
+        ],
+
+        instructions: [
+            "Slice the bolillo bread in half and spread both sides with mayo",
+            "Place the bread on a hot pan and cook each side for about 3 minutes until golden brown",
+            "Warm up slices of ham on the same pan",
+            "Start assembling the sandwich and add all toppings",
+            "Serve with jalapeno and/or hot chips"
+        ]
+    },
+
+
+    {
+        title: "Chicken Salad",
+
+        description:
+        "A cold chicken salad for everyday",
+
+        ingredients: [
+            "1 shredded rotisserie chicken",
+            "jalapeno juice",
+            "Mayo",
+            "lettuce",
+            "Salt",
+            "Black pepper",
+            "1 can of corn"
+        ],
+
+        instructions: [
+            "Add all ingredients to a large bowl and mix",
+            "Serve with salt crackers"
+        ]
+    },
+
+
+    {
+        title: "Shrimp and rice",
+
+        description:
+        "Flavorful shrimp and rice dish with cajun sauce",
+
+        ingredients: [
+            "Sliced onion",
+            "Shrimp",
+            "Rice",
+            "cajun seasoning",
+            "Butter",
+            "Minced garlic"
+        ],
+
+        instructions: [
+            "Cook white rice like you normally would with water and butter.",
+            "In a seperate pan add minced garlic and butter.",
+            "Season your shrimp however you'd like and cook them fully",
+            "To make the cajun shrimp you will add garlic, cajun seasoning and butter to a pan and cook until the onion is translucent.",
+            "Assemble meal with a serving of rice, shrimp, and some cajun sauce"
+        ]
+    }
+
+];
+
+let currentRecipe = 0;
+
+
+function displayRecipe() {
+
+    const recipe = recipes[currentRecipe];
+
+    document.getElementById("recipeNumber").textContent =
+        `Recipe ${currentRecipe + 1} of ${recipes.length}`;
+
+    document.getElementById("recipeTitle").textContent =
+        recipe.title;
+
+    document.getElementById("recipeDescription").textContent =
+        recipe.description;
+
+
+    const ingredientsList =
+        document.getElementById("ingredients");
+
+    ingredientsList.innerHTML = "";
+
+    recipe.ingredients.forEach(function(ingredient) {
+
+        const li = document.createElement("li");
+
+        li.textContent = ingredient;
+
+        ingredientsList.appendChild(li);
+
+    });
+
+
+    const instructionsList =
+        document.getElementById("instructions");
+
+    instructionsList.innerHTML = "";
+
+    recipe.instructions.forEach(function(instruction) {
+
+        const li = document.createElement("li");
+
+        li.textContent = instruction;
+
+        instructionsList.appendChild(li);
+
+    });
+
+}
+
+
+function nextRecipe() {
+
+    currentRecipe++;
+
+    if (currentRecipe >= recipes.length) {
+        currentRecipe = 0;
+    }
+
+    displayRecipe();
+
+}
+
+
+function previousRecipe() {
+
+    currentRecipe--;
+
+    if (currentRecipe < 0) {
+        currentRecipe = recipes.length - 1;
+    }
+
+    displayRecipe();
+
+}
+
+
+displayRecipe();
+
+</script>
+
+</body>
+</html>

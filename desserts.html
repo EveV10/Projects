@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dessert Recipes</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <a href="index.html" class="home-button">
+            ← Recipe Book
+        </a>
+
+        <h1>🍰 Desserts</h1>
+
+    </nav>
+
+
+    <!-- Recipe Book -->
+    <main class="recipe-container">
+
+        <!-- Left Arrow -->
+        <button class="page-arrow left-arrow" onclick="previousRecipe()">
+            ‹
+        </button>
+
+
+        <!-- Recipe Page -->
+        <article class="recipe-page">
+
+            <div class="recipe-number" id="recipeNumber">
+                Recipe 1 of 3
+            </div>
+
+            <h2 id="recipeTitle">
+                Chocolate Chip Cookies
+            </h2>
+
+            <p class="description" id="recipeDescription">
+                Soft, warm, and delicious chocolate chip cookies
+                that are perfect for any occasion.
+            </p>
+
+
+            <div class="recipe-content">
+
+                <!-- Ingredients -->
+                <section>
+
+                    <h3>Ingredients</h3>
+
+                    <ul id="ingredients">
+                        <li>1 cup butter, softened</li>
+                        <li>1 cup white sugar</li>
+                        <li>1 cup brown sugar</li>
+                        <li>2 eggs</li>
+                        <li>2 teaspoons vanilla extract</li>
+                        <li>3 cups all-purpose flour</li>
+                        <li>1 teaspoon baking soda</li>
+                        <li>2 cups chocolate chips</li>
+                    </ul>
+
+                </section>
+
+
+                <!-- Instructions -->
+                <section>
+
+                    <h3>Instructions</h3>
+
+                    <ol id="instructions">
+                        <li>Preheat your oven to 350°F.</li>
+                        <li>Cream together the butter and sugars.</li>
+                        <li>Add the eggs and vanilla.</li>
+                        <li>Mix in the flour and baking soda.</li>
+                        <li>Stir in the chocolate chips.</li>
+                        <li>Place spoonfuls of dough onto a baking sheet.</li>
+                        <li>Bake for 10–12 minutes.</li>
+                        <li>Allow the cookies to cool before serving.</li>
+                    </ol>
+
+                </section>
+
+            </div>
+
+        </article>
+
+
+        <!-- Right Arrow -->
+        <button class="page-arrow right-arrow" onclick="nextRecipe()">
+            ›
+        </button>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        const recipes = [
+
+            {
+                title: "Chocolate Chip Cookies",
+
+                description:
+                    "Soft, warm, and delicious chocolate chip cookies that are perfect for any occasion.",
+
+                ingredients: [
+                    "1 cup butter, softened",
+                    "1 cup white sugar",
+                    "1 cup brown sugar",
+                    "2 eggs",
+                    "2 teaspoons vanilla extract",
+                    "3 cups all-purpose flour",
+                    "1 teaspoon baking soda",
+                    "2 cups chocolate chips"
+                ],
+
+                instructions: [
+                    "Preheat your oven to 350°F.",
+                    "Cream together the butter and sugars.",
+                    "Add the eggs and vanilla.",
+                    "Mix in the flour and baking soda.",
+                    "Stir in the chocolate chips.",
+                    "Place spoonfuls of dough onto a baking sheet.",
+                    "Bake for 10–12 minutes.",
+                    "Allow the cookies to cool before serving."
+                ]
+            },
+
+
+            {
+                title: "Classic Cheesecake",
+
+                description:
+                    "A creamy cheesecake with a buttery biscuit crust.",
+
+                ingredients: [
+                    "2 cups graham cracker crumbs",
+                    "½ cup melted butter",
+                    "24 oz cream cheese",
+                    "1 cup sugar",
+                    "3 eggs",
+                    "1 teaspoon vanilla extract",
+                    "1 cup sour cream"
+                ],
+
+                instructions: [
+                    "Preheat the oven to 325°F.",
+                    "Mix the crumbs and melted butter.",
+                    "Press the mixture into a cake pan.",
+                    "Beat the cream cheese and sugar together.",
+                    "Add the eggs and vanilla.",
+                    "Mix in the sour cream.",
+                    "Pour the filling over the crust.",
+                    "Bake for 55–60 minutes.",
+                    "Cool completely before serving."
+                ]
+            },
+
+
+            {
+                title: "Strawberry Shortcake",
+
+                description:
+                    "Sweet strawberries, fluffy whipped cream, and soft shortcake come together in this classic dessert.",
+
+                ingredients: [
+                    "2 cups strawberries",
+                    "¼ cup sugar",
+                    "2 cups flour",
+                    "¼ cup sugar",
+                    "1 tablespoon baking powder",
+                    "½ cup butter",
+                    "¾ cup milk",
+                    "1 cup whipped cream"
+                ],
+
+                instructions: [
+                    "Slice the strawberries.",
+                    "Mix them with sugar and set aside.",
+                    "Mix the flour, sugar, and baking powder.",
+                    "Cut in the butter.",
+                    "Add the milk and mix gently.",
+                    "Bake at 425°F for about 15 minutes.",
+                    "Allow the shortcakes to cool.",
+                    "Top with strawberries and whipped cream."
+                ]
+            }
+
+        ];
+
+
+        let currentRecipe = 0;
+
+
+        function displayRecipe() {
+
+            const recipe = recipes[currentRecipe];
+
+
+            // Change recipe number
+            document.getElementById("recipeNumber").textContent =
+                `Recipe ${currentRecipe + 1} of ${recipes.length}`;
+
+
+            // Change title
+            document.getElementById("recipeTitle").textContent =
+                recipe.title;
+
+
+            // Change description
+            document.getElementById("recipeDescription").textContent =
+                recipe.description;
+
+
+            // Change ingredients
+            const ingredientsList =
+                document.getElementById("ingredients");
+
+            ingredientsList.innerHTML = "";
+
+            recipe.ingredients.forEach(function(ingredient) {
+
+                const li = document.createElement("li");
+
+                li.textContent = ingredient;
+
+                ingredientsList.appendChild(li);
+
+            });
+
+
+            // Change instructions
+            const instructionsList =
+                document.getElementById("instructions");
+
+            instructionsList.innerHTML = "";
+
+            recipe.instructions.forEach(function(instruction) {
+
+                const li = document.createElement("li");
+
+                li.textContent = instruction;
+
+                instructionsList.appendChild(li);
+
+            });
+
+        }
+
+
+        function nextRecipe() {
+
+            currentRecipe++;
+
+            if (currentRecipe >= recipes.length) {
+                currentRecipe = 0;
+            }
+
+            displayRecipe();
+
+        }
+
+
+        function previousRecipe() {
+
+            currentRecipe--;
+
+            if (currentRecipe < 0) {
+                currentRecipe = recipes.length - 1;
+            }
+
+            displayRecipe();
+
+        }
+
+    </script>
+
+</body>
+</html>

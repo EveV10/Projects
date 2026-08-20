@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breakfast Recipes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <a href="index.html" class="home-button">← Recipe Book</a>
+    <h1>Breakfast</h1>
+</nav>
+
+<main class="recipe-container">
+
+    <button class="page-arrow left-arrow" onclick="previousRecipe()">‹</button>
+
+    <article class="recipe-page">
+
+        <div class="recipe-number" id="recipeNumber">
+            Recipe 1 of 3
+        </div>
+
+        <h2 id="recipeTitle">French Toast</h2>
+
+        <p class="description" id="recipeDescription">
+            Delicious and easy French toast made with cinnamon and vanilla.
+        </p>
+
+        <div class="recipe-content">
+
+            <section>
+                <h3>Ingredients</h3>
+                <ul id="ingredients"></ul>
+            </section>
+
+            <section>
+                <h3>Instructions</h3>
+                <ol id="instructions"></ol>
+            </section>
+
+        </div>
+
+    </article>
+
+    <button class="page-arrow right-arrow" onclick="nextRecipe()">›</button>
+
+</main>
+
+
+<script>
+
+const recipes = [
+
+    {
+        title: "French Toast",
+
+        description:
+        "Delicious and easy French toast made with cinnamon and vanilla.",
+
+        ingredients: [
+            "3 slices of white bread",
+            "2 eggs",
+            "1 teaspoon vanilla extract",
+            "1 teaspoon ground cinnamon",
+            "1/2 cup milk",
+            "strawberries and syrup for serving"
+        ],
+
+        instructions: [
+            "Mix the eggs, milk, vanilla extract, and cinnamon in a shallow bowl.",
+            "Dip each slice of bread into the egg mixture, ensuring both sides are coated.",
+            "Heat a non-stick skillet over medium heat and add a little butter.",
+            "Cook the bread slices until golden brown on both sides.",
+            "Serve warm with your favorite toppings."
+        ]
+    },
+
+
+    {
+        title: "Oatmeal with Fresh Berries",
+
+        description:
+        "A warm and hearty bowl of oatmeal topped with fresh berries and condensed milk.",
+
+        ingredients: [
+            "1 cup of oats",
+            "1 cup of water",
+            "2 cinnamon sticks",
+            "1 teaspoon vanilla extract",
+            "1/2 cup of sugar",
+            "1/2 cup mixed fresh berries",
+            "1 tablespoon of condensed milk or honey for drizzling"
+        ],
+
+        instructions: [
+            "Add water and cinnamon sticks to a pot and bring to a simmer.",
+            "Add the oats and cook until they reach your desired consistency.",
+            "Mix in vanilla extract and sugar.",
+            "Remove the cinnamon sticks and serve the oatmeal in bowls.",
+            "Top with fresh berries and drizzle with condensed milk or honey."
+        ]
+    },
+
+
+    {
+        title: "Biscuits and Gravy",
+
+        description:
+        "A hearty breakfast dish featuring flaky biscuits and creamy gravy.",
+
+        ingredients: [
+            "1 pack of ground breakfast sausage",
+            "2 tablespoond of butter",
+            "1/4 cup of flour",
+            "2 cups of milk",
+            "Salt",
+            "Black pepper"
+        ],
+
+        instructions: [
+            "brown the sausage until fully cooked.",
+            "add in butter and flour and stir for a coumple minutes",
+            "add in the milk,salt,and pepper",
+            "let it cool for a little to thicken up"
+        ]
+    }
+
+];
+
+let currentRecipe = 0;
+
+
+function displayRecipe() {
+
+    const recipe = recipes[currentRecipe];
+
+    document.getElementById("recipeNumber").textContent =
+        `Recipe ${currentRecipe + 1} of ${recipes.length}`;
+
+    document.getElementById("recipeTitle").textContent =
+        recipe.title;
+
+    document.getElementById("recipeDescription").textContent =
+        recipe.description;
+
+
+    const ingredientsList =
+        document.getElementById("ingredients");
+
+    ingredientsList.innerHTML = "";
+
+    recipe.ingredients.forEach(function(ingredient) {
+
+        const li = document.createElement("li");
+
+        li.textContent = ingredient;
+
+        ingredientsList.appendChild(li);
+
+    });
+
+
+    const instructionsList =
+        document.getElementById("instructions");
+
+    instructionsList.innerHTML = "";
+
+    recipe.instructions.forEach(function(instruction) {
+
+        const li = document.createElement("li");
+
+        li.textContent = instruction;
+
+        instructionsList.appendChild(li);
+
+    });
+
+}
+
+
+function nextRecipe() {
+
+    currentRecipe++;
+
+    if (currentRecipe >= recipes.length) {
+        currentRecipe = 0;
+    }
+
+    displayRecipe();
+
+}
+
+
+function previousRecipe() {
+
+    currentRecipe--;
+
+    if (currentRecipe < 0) {
+        currentRecipe = recipes.length - 1;
+    }
+
+    displayRecipe();
+
+}
+
+
+displayRecipe();
+
+</script>
+
+</body>
+</html>
